@@ -1,0 +1,26 @@
+// Fonts
+// @import url("https://fonts.googleapis.com/css?family=Nunito");
+
+// Variables
+// @import "variables";
+
+// Bootstrap
+// @import "~bootstrap/scss/bootstrap";
+.cR {
+    color: red;
+}
+.cG {
+    color: green;
+}
+.mt1 {
+    margin-top: 0.85em;
+}
+.mt2 {
+    margin-top: 1em;
+}
+.fa-check {
+    @extend .cG;
+}
+.fa-times {
+    @extend .cR;
+}
