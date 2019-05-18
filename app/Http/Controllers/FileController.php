@@ -12,7 +12,7 @@ class FileController extends Controller
      *
      * @param CSVImportRequest  $request The HTTP request with file to be processed.
      * 
-     * @author Will Kubenka
+     * @author Will Kubenka <wkubenka@gmail.com>
      * @return Response
      */ 
     function upload(CSVImportRequest $request) {

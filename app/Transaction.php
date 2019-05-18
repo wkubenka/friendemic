@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
-class Row extends Model
+class Transaction extends Model
 {
     public function __construct(array $attributes = array())
     {

@@ -3,63 +3,95 @@
 namespace App\Services;
 
 use Illuminate\Http\UploadedFile;
-use App\Row;
+use App\Transaction;
 
 class CSVService
 {
-    //array of Rows 
-    private $csv; 
+    /**
+     *  All the individual transactions in the csv
+     *
+     * @var array
+     */
+    private $transactions;
 
-    //associative array of keys for $csv
-    //used for comparing older records
+    /**
+     *  associative array of keys for $csv
+     *  used for comparing records of the same customer number
+     *
+     * @var array
+     */
     private $customerNumbers;
 
+    /**
+     * Create a new CSVService instance.
+     *
+     * @param  UploadedFile $file
+     * @return void
+     */
     public function __construct(UploadedFile $file){
         $csvRows = str_getcsv(file_get_contents($file), "\n");//Parse the csv
 
         $headers = explode(",", $csvRows[0]);//get the headers and put them in their own array
-        array_shift($csvRows);//Remove the headers
+        array_shift($csvRows);//Remove the headers from the original array
 
         $customerNumbers = [];
         foreach($csvRows as $key => $row){
+            //TODO: Follow the 1 indentation rule.
             foreach(str_getcsv($row) as $k => $value) {
-                $header = $headers[$k];
+                $header = $headers[$k]; //get the header that aligns with this value
                 $parsedCSVRow[$header] = $value;
             }
+            //if the customerNumbers array already has this customer number in it push this row into it
+            //else set it.
             if(isset($customerNumbers[$parsedCSVRow['cust_num']])){
                 array_push($customerNumbers[$parsedCSVRow['cust_num']], $key);
             } else {
                 $customerNumbers[$parsedCSVRow['cust_num']] = [$key];
             }
+            //convert the separated date and time values into a single dateTime object
+            //these two values get stripped because they are not fillable.
             $parsedCSVRow['dateTime'] = $parsedCSVRow['trans_date'] . ' ' . $parsedCSVRow['trans_time'];
-            $this->csv[] = new Row($parsedCSVRow);
+            $this->transactions[] = new Transaction($parsedCSVRow);
         }
         $this->customerNumbers = $customerNumbers;
     }
 
-    private function checkOlderRecord($row, $context) {
-        // $rowDate = new Carbon($row->trans_date . ' '. $row->trans_time);
-        if(count($this->customerNumbers[$row->cust_num]) > 1) {
-            foreach($this->customerNumbers[$row->cust_num] as $i) {
+    /**
+     * Check each transaction:
+     * 1. Is the oldest trasaction.
+     * 2. Is younger than 7 days.
+     * 3. Which contact method to use.
+     *
+     * @return array
+     */
+    public function processCSV(){
+        foreach($this->transactions as $key => &$transaction){
+            $this->checkOlderRecord($transaction, $key);
+            $transaction->youngerThanDays(7);
+            $transaction->checkContactType();
+        }
+        return $this->transactions;
+    }
+
+    /**
+     * Determine if an older record exists than the current transaction
+     *
+     * @param  Transaction $transaction
+     * @param int $context //The key of the transaction in $this->transactions
+     * @return void
+     */
+    private function checkOlderRecord($transaction, $context) {
+        //TODO: Follow the 1 indentation rule.
+        if(count($this->customerNumbers[$transaction->cust_num]) > 1) {
+            foreach($this->customerNumbers[$transaction->cust_num] as $i) {
                 if($i !== $context) {;
-                    if($row->dateTime->isAfter($this->csv[$i]->dateTime)) {
-                        $row->recommend = false;
-                        $row->message = 'older record exists';
+                    if($transaction->dateTime->isAfter($this->transactions[$i]->dateTime)) {
+                        $transaction->recommend = false;
+                        $transaction->message = 'older record exists';
                     }
                 }
             }
         }
-        return $row;
     }
 
-    
-
-    public function processCSV(){
-        foreach($this->csv as $key => &$row){
-            $this->checkOlderRecord($row, $key);
-            $row->youngerThanDays(7);
-            $row->checkContactType();           
-        }
-        return $this->csv;
-    }
 }
