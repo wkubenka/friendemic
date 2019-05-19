@@ -44,7 +44,7 @@ class CSVService
             //if the customerNumbers array already has this customer number in it push this row into it
             //else set it.
             if(isset($customerNumbers[$parsedCSVRow['cust_num']])){
-                array_push($customerNumbers[$parsedCSVRow['cust_num']], $key);
+                $customerNumbers[$parsedCSVRow['cust_num']][] = $key;
             } else {
                 $customerNumbers[$parsedCSVRow['cust_num']] = [$key];
             }
