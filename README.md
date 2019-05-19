@@ -30,4 +30,7 @@ The CSV is then processed for 3 things.
 2. Is this record older than 7 days?
 3. Should we send the invitation to their phone or email?
 
+## Testing
+Run frontend tests with `npm test`
 
+Run backend test with `phpunit` or `vendor/bin/phpunit`
