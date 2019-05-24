@@ -2,7 +2,7 @@
 
 ## Installation
 ```
-git clone git@github.com:wkubenka/friendemic.git
+git clone https://github.com/wkubenka/friendemic.git
 cd friendemic
 composer install
 cp .env.example .env
