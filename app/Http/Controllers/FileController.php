@@ -19,9 +19,7 @@ class FileController extends Controller
     function upload(CSVImportRequest $request) {
         try{
             $parseCSVJob = new ParseCSVJob($request->file);
-            $parseCSVJob->handle();
-            //If switching to AJAX
-            //ParseCSVJob::dispatchNow($request->file);
+            $this->dispatchNow($parseCSVJob);
             return response()->json($parseCSVJob->getTransactions());
         } catch (\Exception $e) {
             abort(400);

@@ -107,6 +107,11 @@ class ParseCSVJob implements ShouldQueue
         }
     }
 
+    /**
+     * Get transactions
+     *
+     * @return array
+     */
     public function getTransactions()
     {
         return $this->transactions;

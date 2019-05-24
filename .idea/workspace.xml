@@ -3,11 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f2ba1f91-cc8e-4b44-b7c1-f6e31141af47" name="Default Changelist" comment="-Created Tests&#10;-Wrote a bunch of comments">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FileController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FileController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Transaction.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Transaction.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Unit/CSVServiceTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Unit/ParseCSVJobTest.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,8 +22,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/FileController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="18" column="48" lean-forward="true" selection-start-line="18" selection-start-column="48" selection-end-line="18" selection-end-column="48" />
+            <state relative-caret-position="289">
+              <caret line="24" column="21" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -234,9 +230,9 @@
       <path value="$PROJECT_DIR$/vendor/markbaker/complex" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-8" />
-    <option name="width" value="977" />
+    <option name="width" value="1122" />
     <option name="height" value="1050" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -377,12 +373,12 @@
       <workItem from="1557968824610" duration="3450000" />
       <workItem from="1558142293068" duration="6611000" />
       <workItem from="1558195490968" duration="15554000" />
-      <workItem from="1558698978859" duration="3716000" />
+      <workItem from="1558698978859" duration="5185000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="55795000" />
+    <option name="totallyTimeSpent" value="57264000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -394,10 +390,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="0" width="781" height="840" extended-state="0" />
-    <editor active="true" />
+    <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4957627" weight="0.40638003" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4957627" visible="true" weight="0.22818792" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" sideWeight="0.5042373" side_tool="true" weight="0.333795" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -412,7 +407,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.6913408" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50208044" side_tool="true" weight="0.33050847" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49791956" visible="true" weight="0.33050847" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49791956" visible="true" weight="0.32681563" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.32960895" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -705,6 +700,9 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/tests/Unit/ParseCSVJobTest.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -715,13 +713,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/FileController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="18" column="48" lean-forward="true" selection-start-line="18" selection-start-column="48" selection-end-line="18" selection-end-column="48" />
+        <state relative-caret-position="289">
+          <caret line="24" column="21" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="21" />
         </state>
       </provider>
     </entry>
