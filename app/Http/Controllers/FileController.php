@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CSVImportRequest;
 use App\Services\CSVService;
+use App\Jobs\ParseCSVJob;
 
 class FileController extends Controller
 {
@@ -17,9 +18,11 @@ class FileController extends Controller
      */ 
     function upload(CSVImportRequest $request) {
         try{
-            $CSVService = new CSVService($request->file);
-            $processedCSV = $CSVService->processCSV();
-            return response()->json($processedCSV);
+            $parseCSVJob = new ParseCSVJob($request->file);
+            $parseCSVJob->handle();
+            //If switching to AJAX
+            //ParseCSVJob::dispatchNow($request->file);
+            return response()->json($parseCSVJob->getTransactions());
         } catch (\Exception $e) {
             abort(400);
         }

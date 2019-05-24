@@ -57,7 +57,7 @@ class Transaction extends Model
      * @return void
      */
     public function youngerThanDays($days) {
-        $today = Carbon::createFromDate(2018, 3, 5); //March 5, 2018 00:00:00
+        $today = Carbon::createFromDate(2018, 3, 5, 0); //March 5, 2018 00:00:00
         if($today->diffInDays($this->dateTime) > $days){
             $this->recommend = false;
             $this->message = 'occurred more than ' . $days . ' days ago';

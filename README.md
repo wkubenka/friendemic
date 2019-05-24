@@ -5,6 +5,9 @@
 git clone git@github.com:wkubenka/friendemic.git
 cd friendemic
 composer install
+cp .env.example .env
+php artisan key:generate
+npm install
 php artisan serve
 ```
 
@@ -12,25 +15,46 @@ php artisan serve
 
 ## Design Decisions
 I have decided to keep this as simple, but scalable as possible. 
-There is a route to a view with a react application, and an api route to upload a csv file which goes to the FileController.
 
-I like to keep controllers as small as possible, so I pass the file to a service class to be processed. 
-The service constructor assumes the first line of the csv file contains headers.
+The sync driver is currently being used to handle queues, and returning the transactions as JSON from FileController
+ is only possible because the dispatched job is being ran synchronously. If this application needed to scale, I would 
+ switch to using Redis to run jobs asynchronously. This would require storing the transactions from the job in a newly 
+ created DB (or file), and pushing the transactions to the React application using Echo and Pusher when the job is complete.
+
+
+### Routes
+ - / is a route to a view with a React application.  
+ - /api/upload/ is an api route to upload a csv file to the FileController upload method.
+
+
+### Controllers
+
+#### FileController
+The FileController upload method accepts a CSVImportRequest.
+It only dispatches a ParseCSVJob and returns the transactions built by the job.
+
+
+### Jobs
+
+#### ParseCSVJob 
+The constructor assumes the first line of the csv file contains headers.
 These headers are pulled to build an associative array for the rest of the lines.
 These arrays are turned in to Transaction models.
 
-Two things to note here: 
-1. If this application needs to scale, Laravel's queue functionality could be leveraged by turning the service class into a Job class.
-Then simply dispatch a job and return a response rather than waiting for the CSV to be processed.
-2. My Transaction class is extending Model almost purely for the magic methods provided by the Model class. 
-However, this would probably be useful if this program got built out and connected to storage. 
-
-The CSV is then processed for 3 things. 
+When the job is handled, the CSV is checked for 3 things. 
 1. Is there an older record for the same customer number?
 2. Is this record older than 7 days?
 3. Should we send the invitation to their phone or email?
 
+### Requests
+
+#### CSVImportRequest
+Authorized: true
+
+Rules:
+- file: required, file
+
 ## Testing
 Run frontend tests with `npm test`
 
-Run backend test with `phpunit` or `vendor/bin/phpunit`
+Run backend tests with `phpunit` or `vendor/bin/phpunit`
